@@ -1,0 +1,37 @@
+project sclibtest : requirements 
+	<threading>multi
+	<address-model>32 
+;
+
+local GL_ROOT = [ gl-root ] ;
+
+use-project /used_sclib : ./sclib ;
+use-project /system : $(GL_ROOT)/system ;
+
+alias scdebug :
+	anomalyApp : <variant>debug ;
+
+exe anomalyApp : src/instrument.cpp
+		src/database.cpp
+		src/dico.cpp
+		src/ML.cpp
+		src/MO.cpp
+		src/MR.cpp
+		src/record.cpp
+		src/utp_thread.cpp
+		src/check.cpp
+	   	src/checkDico.cpp
+		src/checkML.cpp
+		src/checkMO.cpp
+		src/checkMR.cpp
+		src/checkPrice.cpp
+		src/slcFeedGetter.cpp
+		src/main.cpp
+		src/utp_buffer.cpp
+
+		/used_sclib//sclib/<link>static
+	
+	: <include>inc
+	
+	;
+
